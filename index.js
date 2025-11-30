@@ -11,9 +11,14 @@ app.use(cors());
 app.use(express.json());
 
 // MONGO_URL from .env or fallback local
-const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:admin123@192.168.0.104:27017/db?authSource=admin";
+//MONGO_URL='mongodb://admin:admin123@mongo-service:27017/admin?authSource=admin'
+//const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:admin123@192.168.0.104:27017/db?authSource=admin";
 
-console.log(MONGO_URL)
+const USER_NAME=process.env.USER_NAME
+const PASSWORD=process.env.PASSWORD
+const HOST=process.env.HOST
+const MONGO_HOST_PORT = process.env.MONGO_HOST_PORT
+const MONGO_URL = `mongodb://${USER_NAME}:${PASSWORD}@${HOST}:${MONGO_HOST_PORT}/db?authSource=admin`
 
 mongoose.connect(MONGO_URL, { serverSelectionTimeoutMS: 10000 })
   .then(() => console.log("MongoDB Connected"))

@@ -14,8 +14,8 @@ app.use(express.json());
 //MONGO_URL='mongodb://admin:admin123@mongo-service:27017/admin?authSource=admin'
 //const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:admin123@192.168.0.104:27017/db?authSource=admin";
 
-const USER_NAME=process.env.USER_NAME
-const PASSWORD=process.env.PASSWORD
+const MONGO_USERNAME=process.env.MONGO_USERNAME
+const MONGO_PASSWORD=process.env.MONGO_PASSWORD
 const HOST=process.env.HOST
 const MONGO_HOST_PORT = process.env.MONGO_HOST_PORT
 const DB = process.env.DB

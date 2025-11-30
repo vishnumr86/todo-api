@@ -18,7 +18,8 @@ const USER_NAME=process.env.USER_NAME
 const PASSWORD=process.env.PASSWORD
 const HOST=process.env.HOST
 const MONGO_HOST_PORT = process.env.MONGO_HOST_PORT
-const MONGO_URL = `mongodb://${USER_NAME}:${PASSWORD}@${HOST}:${MONGO_HOST_PORT}/db?authSource=admin`
+const DB = process.env.DB
+const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${HOST}:${MONGO_HOST_PORT}/${DB}?authSource=admin`
 
 mongoose.connect(MONGO_URL, { serverSelectionTimeoutMS: 10000 })
   .then(() => console.log("MongoDB Connected"))
@@ -32,5 +33,5 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/todos", todoRoutes);
 
-const PORT = process.env.PORT || 8001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const PORT = process.env.APP_PORT;
+app.listen(PORT, () => console.log(`Server running on port ${APP_PORT}`));

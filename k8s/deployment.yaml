@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todoapi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: todoapi
+  template:
+    metadata:
+      labels:
+        app: todoapi
+    spec:
+      containers:
+      - name: todoapicontainer
+        image: umadevimt/todoapi:latest
+        ports:
+        - containerPort: 8001
+        env:
+        # ------- Configmap values -----------
+        - name: HOST
+          valueFrom:
+            configMapKeyRef:
+              name: todo-config
+              key: HOST
+        - name: DB
+          valueFrom:
+            configMapKeyRef:
+              name: todo-config
+              key: DB
+        - name: MONGO_HOST_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: todo-config
+              key: MONGO_HOST_PORT
+        - name: APP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: todo-config
+              key: APP_PORT
+       # ---- Secrets values ----------
+        - name: MONGO_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: MONGO_USERNAME
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: MONGO_PASSWORD
+      imagePullSecrets:
+      - name: regdockcred

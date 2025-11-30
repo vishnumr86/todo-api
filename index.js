@@ -21,6 +21,8 @@ const MONGO_HOST_PORT = process.env.MONGO_HOST_PORT
 const DB = process.env.DB
 const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${HOST}:${MONGO_HOST_PORT}/${DB}?authSource=admin`
 
+console.log(MONGO_URL)
+
 mongoose.connect(MONGO_URL, { serverSelectionTimeoutMS: 10000 })
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log("Mongo Error:", err.message));
